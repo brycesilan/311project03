@@ -11,4 +11,48 @@
 
 //TODO dont forget to delete stuff
 
-//void MinPriorityQueue::MinPriorityQueue()
+MinPriorityQueue::Element::Element() {
+  string=nullptr;
+  key=0;
+}
+
+MinPriorityQueue::Element::Element(const string& id, int key) {
+  string=id;
+  key=key; //TODO this->key ?
+}
+
+MinPriorityQueue::Element::~Element() {
+  string=nullptr;
+  key=0;
+}
+
+MinPriorityQueue::MinPriorityQueue() {
+}
+
+MinPriorityQueue::~MinPriorityQueue() {
+  //TODO go through and delete elements and vector
+}
+
+void MinPriorityQueue::insert(const string& id, int key) {
+}
+
+void MinPriorityQueue::decreaseKey(string id, int newKey) {
+}
+
+string MinPriorityQueue::extractMin() {
+}
+
+void MinPriorityQueue::buildMinHeap() {
+}
+
+void MinPriorityQueue::minHeapify(int i) {
+}
+
+int MinPriorityQueue::parent(int i) {
+}
+
+int MinPriorityQueue::left(int i) {
+}
+
+int MinPriorityQueue::right(int i) {
+}

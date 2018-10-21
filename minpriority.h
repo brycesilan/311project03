@@ -6,6 +6,10 @@
 
 #ifndef MINPRIORITY_H
 #define MINPRIORITY_H
+#include <iostream>
+#include <vector>
+
+using namespace std;
 
 class MinPriorityQueue {
   public:
@@ -20,8 +24,7 @@ class MinPriorityQueue {
     int parent(int i);    /** returns parent of element 'i' */
     int left(int i);    /** returns left child of element 'i' */
     int right(int i);   /** returns right child of element 'i' */
-    vector<Element*> minheap;   /** data storage */
-
+    
     class Element {   /** declaration of an Element */
       public:
         string* id;
@@ -30,6 +33,8 @@ class MinPriorityQueue {
         Element(const string& id, int key);
         ~Element();
     };
+
+    vector<Element*> minheap;   /** data storage */
 };
 
 #endif /** MINPRIORITY_H */
