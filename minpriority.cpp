@@ -9,20 +9,19 @@
 
 #include "minpriority.h"
 
-//TODO dont forget to delete stuff
-
 MinPriorityQueue::Element::Element() {
-  string=nullptr;
+  id=nullptr;
   key=0;
 }
 
 MinPriorityQueue::Element::Element(const string& id, int key) {
-  string=id;
-  key=key; //TODO this->key ?
+  this->id=id;
+  this->key=key; //TODO this->key ?
 }
 
 MinPriorityQueue::Element::~Element() {
-  string=nullptr;
+  //TODO have to delete id ?
+  id=nullptr;
   key=0;
 }
 
@@ -49,10 +48,15 @@ void MinPriorityQueue::minHeapify(int i) {
 }
 
 int MinPriorityQueue::parent(int i) {
+  //TODO do i have to specify that is is floor?
+  return i*2;
 }
 
 int MinPriorityQueue::left(int i) {
+  return i/2;
 }
 
 int MinPriorityQueue::right(int i) {
+  //TODO check that works
+  return i/2+1;
 }
