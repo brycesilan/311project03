@@ -21,9 +21,9 @@ class MinPriorityQueue {
   private:
     void buildMinHeap();    /** builds min heap from vector */
     void minHeapify(int i);   /** makes 'i' element root of a min heap */
-    int parent(int i);    /** returns parent of element 'i' */
-    int left(int i);    /** returns left child of element 'i' */
-    int right(int i);   /** returns right child of element 'i' */
+    int parent(int i);    /** returns parent index of element 'i' */
+    int left(int i);    /** returns left child index of element 'i' */
+    int right(int i);   /** returns right child index of element 'i' */
     
     class Element {   /** declaration of an Element */
       public:

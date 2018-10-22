@@ -27,6 +27,7 @@ MinPriorityQueue::Element::~Element() {
 }
 
 MinPriorityQueue::MinPriorityQueue() {
+  //TODO what do i initialize?
 }
 
 MinPriorityQueue::~MinPriorityQueue() {
@@ -42,6 +43,7 @@ void MinPriorityQueue::insert(const string& id, int key) {
 void MinPriorityQueue::decreaseKey(string id, int newKey) {
   //TODO do i compare strings until we find index?
   //are we setting the minHeap[newKey] to 'id'
+  cout << id << newKey;
 }
 
 string MinPriorityQueue::extractMin() {
@@ -67,8 +69,8 @@ void MinPriorityQueue::buildMinHeap() {
 }
 
 void MinPriorityQueue::minHeapify(int i) {
-  int left=left(i);
-  int right=right(i);
+  unsigned int left=left(i); //should i do 2i or make left(int i) a private non-member function
+  unsigned int right=right(i);
   int smallest;
 
   if(left<=minHeap.size() && minHeap[left]<minHeap[i]) { //TODO watch for off by ones
@@ -77,7 +79,7 @@ void MinPriorityQueue::minHeapify(int i) {
   else {
     smallest=i;
   }
-  if(right<=minHeap.size() && minHeap[right]<minHeap[largest]) {
+  if(right<=minHeap.size() && minHeap[right]<minHeap[smallest]) {
     smallest=right;
   }
   if(smallest!=i) {
