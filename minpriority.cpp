@@ -34,12 +34,14 @@ MinPriorityQueue::~MinPriorityQueue() {
 }
 
 void MinPriorityQueue::insert(const string& id, int key) {
-  //TODO is this a insert at end or insert amd minheap it
+  //TODO is this a insert at end or insert and minheap it
+  //also are we keeping track of heapSize?
   cout << key << id;
 }
 
 void MinPriorityQueue::decreaseKey(string id, int newKey) {
-  cout << id << newKey;
+  //TODO do i compare strings until we find index?
+  //are we setting the minHeap[newKey] to 'id'
 }
 
 string MinPriorityQueue::extractMin() {
@@ -51,16 +53,40 @@ string MinPriorityQueue::extractMin() {
 
   //max=minHeap[0];
   minHeap[0]=minHeap[minHeap.size()-1]; //TODO might need -1 cause 0-4 is size 5
+  //TODO heapSize-- but are we keeping track of that?
   minHeapify(0);
   //return max;
   return nullptr;
 }
 
 void MinPriorityQueue::buildMinHeap() {
+  //TODO will not having a heapSize var break this?
+  for(int idx=minHeap.size()/2; idx>=0; idx--) { //TODO make sure this works
+    minHeapify(idx);
+  }
 }
 
 void MinPriorityQueue::minHeapify(int i) {
-  cout << i;
+  int left=left(i);
+  int right=right(i);
+  int smallest;
+
+  if(left<=minHeap.size() && minHeap[left]<minHeap[i]) { //TODO watch for off by ones
+    smallest=left;
+  }
+  else {
+    smallest=i;
+  }
+  if(right<=minHeap.size() && minHeap[right]<minHeap[largest]) {
+    smallest=right;
+  }
+  if(smallest!=i) {
+    Element* tmp=minHeap[smallest];
+    minHeap[smallest]=minHeap[i];
+    minHeap[i]=tmp;
+
+    minHeapify(smallest);
+  }
 }
 
 int MinPriorityQueue::parent(int i) {
