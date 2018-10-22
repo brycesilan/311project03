@@ -15,15 +15,12 @@ MinPriorityQueue::Element::Element() {
 }
 
 MinPriorityQueue::Element::Element(const string& id, int key) {
-  //*this->id = id;
-  cout << id;
-  this->key=key; //TODO this->key ?
+  this->id=new string(id);
+  this->key=key;
 }
 
 MinPriorityQueue::Element::~Element() {
-  //TODO have to delete id ?
-  id=nullptr;
-  key=0;
+  delete id;
 }
 
 MinPriorityQueue::MinPriorityQueue() {
@@ -31,46 +28,60 @@ MinPriorityQueue::MinPriorityQueue() {
 }
 
 MinPriorityQueue::~MinPriorityQueue() {
-  //TODO go through and delete elements and vector
+  //TODO go through and delete elements in vector
 }
 
 void MinPriorityQueue::insert(const string& id, int key) {
-  //TODO is this a insert at end or insert and minheap it
-  //also are we keeping track of heapSize?
-  cout << key << id;
+  Element* tmp=new Element(id, key);
+  minHeap.push_back(tmp);
+  decreaseKey(*tmp->id, key); //TODO make sure correct
 }
 
 void MinPriorityQueue::decreaseKey(string id, int newKey) {
-  //TODO do i compare strings until we find index?
-  //are we setting the minHeap[newKey] to 'id'
-  cout << id << newKey;
+  int tmpKey=-1;
+
+  for(unsigned int idx=0; idx<=minHeap.size()-1; idx++) { //TODO check for off by ones
+    // also -1 ?
+    if(*minHeap[idx]->id==id) {
+      tmpKey=idx;
+      break;
+    }
+  }
+
+  if(tmpKey > minHeap[newKey]) { //TODO this is not right
+    cerr << "Error: New key is greater than current key" << endl;
+  }
+  // TODO a[i]=key ? minHeap[newKey]=
+  while(newKey>0 && minHeap[parent(newKey)] > minHeap[newKey]) {
+    //exchange move newKey
+    //TODO this is definitely wrong
+  }
 }
 
 string MinPriorityQueue::extractMin() {
-  //Element* max;
+  Element* max;
 
   if(minHeap.size()<1) {
     cerr << "Error: Heap underflow" << endl;
   }
 
-  //max=minHeap[0];
+  max=minHeap[0];
   minHeap[0]=minHeap[minHeap.size()-1]; //TODO might need -1 cause 0-4 is size 5
-  //TODO heapSize-- but are we keeping track of that?
   minHeapify(0);
-  //return max;
-  return nullptr;
+
+  cout << "extract min is returning : " << *max->id << endl;
+  return *max->id;
 }
 
 void MinPriorityQueue::buildMinHeap() {
-  //TODO will not having a heapSize var break this?
   for(int idx=minHeap.size()/2; idx>=0; idx--) { //TODO make sure this works
     minHeapify(idx);
   }
 }
 
 void MinPriorityQueue::minHeapify(int i) {
-  unsigned int left=left(i); //should i do 2i or make left(int i) a private non-member function
-  unsigned int right=right(i);
+  unsigned int left=this->left(i);
+  unsigned int right=this->right(i);
   int smallest;
 
   if(left<=minHeap.size() && minHeap[left]<minHeap[i]) { //TODO watch for off by ones
