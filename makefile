@@ -4,8 +4,11 @@ LDFLAGS =
 
 PROG = minq
 
-$(PROG) : minpriority.o main.cpp
-	$(CXX) $(LDFLAGS) minpriority.o -o $(PROG)
+$(PROG) : main.o minpriority.o
+	$(CXX) $(LDFLAGS) main.o minpriority.o -o $(PROG)
+
+main.o : main.cpp minpriority.h
+	$(CXX) $(CXXFLAGS) main.cpp
 
 minpriority.o : minpriority.cpp minpriority.h
 	$(CXX) $(CXXFLAGS) minpriority.cpp

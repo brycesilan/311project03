@@ -34,7 +34,7 @@ class MinPriorityQueue {
         ~Element();
     };
 
-    vector<Element*> minheap;   /** data storage */
+    vector<Element*> minHeap;   /** data storage */
 };
 
 #endif /** MINPRIORITY_H */

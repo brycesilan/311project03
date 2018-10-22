@@ -15,7 +15,8 @@ MinPriorityQueue::Element::Element() {
 }
 
 MinPriorityQueue::Element::Element(const string& id, int key) {
-  this->id=id;
+  //*this->id = id;
+  cout << id;
   this->key=key; //TODO this->key ?
 }
 
@@ -33,18 +34,33 @@ MinPriorityQueue::~MinPriorityQueue() {
 }
 
 void MinPriorityQueue::insert(const string& id, int key) {
+  //TODO is this a insert at end or insert amd minheap it
+  cout << key << id;
 }
 
 void MinPriorityQueue::decreaseKey(string id, int newKey) {
+  cout << id << newKey;
 }
 
 string MinPriorityQueue::extractMin() {
+  //Element* max;
+
+  if(minHeap.size()<1) {
+    cerr << "Error: Heap underflow" << endl;
+  }
+
+  //max=minHeap[0];
+  minHeap[0]=minHeap[minHeap.size()-1]; //TODO might need -1 cause 0-4 is size 5
+  minHeapify(0);
+  //return max;
+  return nullptr;
 }
 
 void MinPriorityQueue::buildMinHeap() {
 }
 
 void MinPriorityQueue::minHeapify(int i) {
+  cout << i;
 }
 
 int MinPriorityQueue::parent(int i) {

@@ -21,16 +21,20 @@ int main() {
     cin >> input;
 
     if(input=='a') {
-      string& inString='0';
-      int key=0;
+      //TODO initialize string?
+      //string& inString;
+      //int key=0;
 
-      cin >> inString >> key;
+      //cin >> inString >> key;
 
-      mainMinQueue.insert(inString, key);
+      //mainMinQueue.insert(inString, key);
     }
     else if(input=='d') {
     }
     else if(input=='x') {
+    }
+    else {
+      cerr << "Error: Invalid input" << endl;
     }
   }
 
