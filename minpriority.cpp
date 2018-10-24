@@ -28,7 +28,9 @@ MinPriorityQueue::MinPriorityQueue() {
 }
 
 MinPriorityQueue::~MinPriorityQueue() {
-  //TODO go through and delete elements in vector
+  for(unsigned int idx=0; idx<minHeap.size(); idx++) { //TODO check off by ones
+    delete minHeap[idx]; //* ?
+  }
 }
 
 void MinPriorityQueue::insert(const string& id, int key) {
@@ -48,13 +50,15 @@ void MinPriorityQueue::decreaseKey(string id, int newKey) {
     }
   }
 
-  if(tmpKey > minHeap[newKey]) { //TODO this is not right
+  if(minHeap[tmpKey] > minHeap[newKey]) {
     cerr << "Error: New key is greater than current key" << endl;
   }
-  // TODO a[i]=key ? minHeap[newKey]=
-  while(newKey>0 && minHeap[parent(newKey)] > minHeap[newKey]) {
-    //exchange move newKey
-    //TODO this is definitely wrong
+  while(newKey>0 && minHeap[parent(newKey)] > minHeap[newKey]) { //TODO check off by ones
+    Element* tmp=minHeap[newKey];
+    minHeap[newKey]=minHeap[parent(newKey)];
+    minHeap[parent(newKey)]=tmp;
+
+    newKey=parent(newKey);
   }
 }
 
@@ -62,7 +66,7 @@ string MinPriorityQueue::extractMin() {
   Element* max;
 
   if(minHeap.size()<1) {
-    cerr << "Error: Heap underflow" << endl;
+    return nullptr; //this was the errror heap underflow
   }
 
   max=minHeap[0];

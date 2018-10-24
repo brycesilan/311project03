@@ -21,17 +21,30 @@ int main() {
     cin >> input;
 
     if(input=='a') {
-      //TODO initialize string?
-      //string& inString;
-      //int key=0;
+      string inString;
+      int key=0;
 
-      //cin >> inString >> key;
+      cin >> inString >> key;
 
-      //mainMinQueue.insert(inString, key);
+      mainMinQueue.insert(inString, key); //TODO idk if this works cause string&
     }
     else if(input=='d') {
+      string inString;
+      int key=0;
+
+      cin >> inString >> key;
+
+      mainMinQueue.decreaseKey(inString, key);
     }
     else if(input=='x') {
+      string extractedString=mainMinQueue.extractMin();
+
+      if(extractedString!=nullptr) {
+        cout << extractedString << endl;
+      }
+      else {
+        cout << "empty" << endl;
+      }
     }
     else {
       cerr << "Error: Invalid input" << endl;
