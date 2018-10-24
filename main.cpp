@@ -39,7 +39,7 @@ int main() {
     else if(input=='x') {
       string extractedString=mainMinQueue.extractMin();
 
-      if(extractedString!=nullptr) {
+      if(extractedString!="") {
         cout << extractedString << endl;
       }
       else {

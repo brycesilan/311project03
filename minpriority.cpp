@@ -24,7 +24,6 @@ MinPriorityQueue::Element::~Element() {
 }
 
 MinPriorityQueue::MinPriorityQueue() {
-  //TODO what do i initialize?
 }
 
 MinPriorityQueue::~MinPriorityQueue() {
@@ -36,29 +35,40 @@ MinPriorityQueue::~MinPriorityQueue() {
 void MinPriorityQueue::insert(const string& id, int key) {
   Element* tmp=new Element(id, key);
   minHeap.push_back(tmp);
+  cout << "heap size is " << minHeap.size() << endl;
+  cout << "element 1 is " << *minHeap[0]->id << endl;
+  cout << "tmp id is " << *tmp->id << endl;
+  cout << "key is " << key << endl;
   decreaseKey(*tmp->id, key); //TODO make sure correct
 }
 
 void MinPriorityQueue::decreaseKey(string id, int newKey) {
   int tmpKey=-1;
 
-  for(unsigned int idx=0; idx<=minHeap.size()-1; idx++) { //TODO check for off by ones
-    // also -1 ?
+  for(unsigned int idx=0; idx<=minHeap.size()-1; idx++) { //TODO Ob1s, also -1?
     if(*minHeap[idx]->id==id) {
       tmpKey=idx;
       break;
     }
   }
 
-  if(minHeap[tmpKey] > minHeap[newKey]) {
+  //cout << "tmp key is " << tmpKey;
+  //cout << " and the vector thing is " << *minHeap[tmpKey]->id << endl;
+  //cout << "new key is " << newKey;
+  //cout << " and the vector thing is " << *minHeap[newKey]->id << endl;
+
+  if(minHeap[newKey]->id > minHeap[tmpKey]-id) {
     cerr << "Error: New key is greater than current key" << endl;
   }
-  while(newKey>0 && minHeap[parent(newKey)] > minHeap[newKey]) { //TODO check off by ones
-    Element* tmp=minHeap[newKey];
-    minHeap[newKey]=minHeap[parent(newKey)];
-    minHeap[parent(newKey)]=tmp;
+  
+  minHeap[tmpKey]=newKey
 
-    newKey=parent(newKey);
+  while(tmpKey>0 && minHeap[parent(tmpKey)] > minHeap[tmpKey]) { //TODO Ob1s
+    Element* tmp=minHeap[tmpKey];
+    minHeap[tmpKey]=minHeap[parent(tmpKey)];
+    minHeap[parent(tmpKey)]=tmp;
+
+    tmpKey=parent(tmpKey);
   }
 }
 
@@ -66,14 +76,14 @@ string MinPriorityQueue::extractMin() {
   Element* max;
 
   if(minHeap.size()<1) {
-    return nullptr; //this was the errror heap underflow
+    return ""; //this was the error heap underflow
   }
 
   max=minHeap[0];
   minHeap[0]=minHeap[minHeap.size()-1]; //TODO might need -1 cause 0-4 is size 5
   minHeapify(0);
 
-  cout << "extract min is returning : " << *max->id << endl;
+  cout << "extract min is returning : " << *max->id << endl; //TODO for debugging
   return *max->id;
 }
 
