@@ -1,11 +1,11 @@
 a sam 3
 a fred 2
 a polly 18
-a jen 24
+a jenn 24
 d polly 1
 x
 x
-d jen 5
+d jenn 5
 x
 x
 x
